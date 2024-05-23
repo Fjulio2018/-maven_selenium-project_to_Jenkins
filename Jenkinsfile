@@ -2,21 +2,27 @@ pipeline {
     agent any
 
     stages {
-        stage('Verify if Browsers are Installed') {
+        stage('Install npm and webdriver-manager') {
             steps {
                 script {
-                    def chromeVersion = sh(script: 'google-chrome --version || echo "Google Chrome is not installed"', returnStdout: true).trim()
+                    // Instala o npm
+                    sh 'sudo apt-get update'
+                    sh 'sudo apt-get install -y npm'
 
-                    echo "Chrome Version: ${chromeVersion}"
-
+                    // Instala o webdriver-manager
+                    sh 'sudo npm install -g webdriver-manager'
                 }
             }
         }
-
-        stage('Run Tests') {
+        stage('Update WebDriverManager') {
             steps {
-                sh 'mvn clean test'
+                script {
+                    // Atualiza o WebDriverManager com a versão específica do ChromeDriver
+                    sh 'sudo webdriver-manager update --versions.chrome=125.0.6422.77'
+                }
             }
         }
+        // Outros estágios do seu pipeline aqui
     }
+    // Outras definições do pipeline aqui
 }
