@@ -14,14 +14,25 @@ pipeline {
             }
         }
 
-
-
-        stage('Build') {
+        stage('Setup') {
             steps {
+                // Atualiza o WebDriverManager
+                sh 'webdriver-manager update'
+            }
+        }
+        stage('Start WebDriverManager') {
+            steps {
+                // Inicia o WebDriverManager
+                sh 'webdriver-manager start'
+            }
+        }
+        stage('Run Tests') {
+            steps {
+                // Execute seus testes aqui
                 sh 'mvn clean test'
             }
         }
-    }
+    } // Faltava este bloco para fechar as stages
 
     post {
         always {
