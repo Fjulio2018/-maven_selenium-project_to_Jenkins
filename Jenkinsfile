@@ -16,23 +16,28 @@ pipeline {
 
         stage('Setup') {
             steps {
-                // Atualiza o WebDriverManager
+                // Remover a pasta selenium (caso exista)
+                sh 'rm -rf /usr/local/lib/node_modules/webdriver-manager/selenium'
+
+                // Atualizar o WebDriverManager
                 sh 'webdriver-manager update'
             }
         }
+
         stage('Start WebDriverManager') {
             steps {
-                // Inicia o WebDriverManager
+                // Iniciar o WebDriverManager
                 sh 'webdriver-manager start'
             }
         }
+
         stage('Run Tests') {
             steps {
                 // Execute seus testes aqui
                 sh 'mvn clean test'
             }
         }
-    } // Faltava este bloco para fechar as stages
+    }
 
     post {
         always {
