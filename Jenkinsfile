@@ -1,27 +1,41 @@
 pipeline {
     agent any
+
+    environment {
+        MAVEN_HOME = '/usr/share/maven'
+        PATH = "$PATH:$MAVEN_HOME/bin"
+        CHROME_VERSION = '125.0.6422.76'
+    }
+
     stages {
-        stage('Verify if browsers are installed') {
+        stage('Checkout SCM') {
             steps {
-                script {
-                    def chromeVersion = sh(script: 'google-chrome --version || echo "Google Chrome is not installed"', returnStdout: true).trim()
-
-                    echo "Chrome Version: ${chromeVersion}"
-
-                }
+                checkout scm
             }
         }
 
-           environment {
-                MAVEN_HOME = '/usr/share/maven'
-                PATH = "$PATH:$MAVEN_HOME/bin"
-            }
-
-        stage('Run Tests') {
+        stage('Update WebDriverManager') {
             steps {
-                
-                sh './mvn clean test'
+                sh "sudo webdriver-manager update --versions.chrome=${CHROME_VERSION}"
             }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'mvn clean test'
+            }
+        }
+    }
+
+    post {
+        always {
+            // Comandos para limpar efeitos colaterais, se necessário
+        }
+        success {
+            // Comandos a serem executados em caso de sucesso
+        }
+        failure {
+            // Comandos a serem executados em caso de falha
         }
     }
 }
