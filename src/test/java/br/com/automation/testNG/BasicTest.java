@@ -2,32 +2,40 @@ package br.com.automation.testNG;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.slf4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+
 import static java.lang.invoke.MethodHandles.lookup;
 import static org.slf4j.LoggerFactory.getLogger;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.slf4j.Logger;
 
-public class DemonstraTest {
+public class BasicTest {
     WebDriver driver;
     static final Logger log = getLogger(lookup().lookupClass());
 
     @BeforeSuite
-    public void setUpClass(){
+    public void setUpClass() {
         WebDriverManager.chromedriver().setup();
     }
 
     @BeforeTest
-    public void setup() {
+    void setUPTest() {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
         driver = new ChromeDriver();
-        driver.manage().window().maximize();
 
+    }
 
+    @AfterTest
+    void teardown() {
+        if (driver != null) {
+            driver.quit();
+        }
     }
 
     @Test
@@ -43,10 +51,5 @@ public class DemonstraTest {
 
 
 
-    }
-
-    @AfterTest
-    void teardown() {
-        driver.quit();
     }
 }
