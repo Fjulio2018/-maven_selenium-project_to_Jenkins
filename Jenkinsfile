@@ -29,13 +29,16 @@ pipeline {
 
     post {
         always {
-            // Comandos para limpar efeitos colaterais, se necessário
+            // Passos a serem executados independentemente do resultado
+            echo 'Pipeline concluded'
         }
         success {
-            // Comandos a serem executados em caso de sucesso
+            // Passos a serem executados em caso de sucesso
+            echo 'Pipeline succeeded'
         }
         failure {
-            // Comandos a serem executados em caso de falha
+            // Passos a serem executados em caso de falha
+            echo 'Pipeline failed'
         }
     }
 }
