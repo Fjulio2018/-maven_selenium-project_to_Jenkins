@@ -14,6 +14,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 public class DemonstraTest {
     WebDriver driver;
     static final Logger log = getLogger(lookup().lookupClass());
+    String sutUrl = "https://bonigarcia.dev/selenium-webdriver-java/";
 
     @BeforeTest
     public void setup() {
@@ -27,14 +28,14 @@ public class DemonstraTest {
 
     @Test
     public void validaHome() {
-//        String sutUrl = "https://bonigarcia.dev/selenium-webdriver-java/";
-//        driver.get(sutUrl);
-//        String currentTitle = driver.getTitle();
-//        String expectedTitle = "Selenium WebDriver";
-//        log.debug("The title of {} is {}", sutUrl, currentTitle);
-//        Assert.assertTrue(currentTitle.contains(expectedTitle), "The Title is like that: " + currentTitle);
 
-        Assert.assertEquals(1,1);
+        driver.get(sutUrl);
+        String currentTitle = driver.getTitle();
+        String expectedTitle = "Selenium WebDriver";
+        log.debug("The title of {} is {}", sutUrl, currentTitle);
+        Assert.assertTrue(currentTitle.contains(expectedTitle), "The Title is like that: " + currentTitle);
+
+
     }
 
     @AfterTest
