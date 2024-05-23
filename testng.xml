@@ -4,7 +4,7 @@
     <test name="testSelenuimNG">
         <classes>
             <class name="br.com.automation.testNG.DemonstraTest"></class>
-            <class name="br.com.automation.testNG.BasicTest"></class>
+
         </classes>
     </test>
 
