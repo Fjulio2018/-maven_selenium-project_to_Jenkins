@@ -19,7 +19,8 @@ public class DemonstraTest {
     @BeforeSuite
     public void setUpClass(){
         // Define o caminho do ChromeDriver manualmente
-        System.setProperty("webdriver.chrome.driver", "maven_selenium-project\\chromedriver-win64\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "/var/jenkins_home/workspace/Pipe Mvn Project/maven_selenium-project/chromedriver-win64/chromedriver.exe");
+
 
         // Opcional: configura o ChromeDriver automaticamente, se necessário
         // WebDriverManager.chromedriver().setup();
