@@ -16,8 +16,8 @@ pipeline {
 
         stage('Setup') {
             steps {
-                // Remover a pasta selenium (caso exista)
-                sh 'rm -rf /usr/local/lib/node_modules/webdriver-manager/selenium'
+            // Remover a pasta selenium (caso exista) com permissões de superusuário
+                sh 'sudo rm -rf /usr/local/lib/node_modules/webdriver-manager/selenium'
 
                 // Atualizar o WebDriverManager
                 sh 'webdriver-manager update'
