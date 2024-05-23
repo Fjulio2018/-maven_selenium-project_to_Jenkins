@@ -14,11 +14,7 @@ pipeline {
             }
         }
 
-        stage('Update WebDriverManager') {
-            steps {
-                sh "sudo webdriver-manager update --versions.chrome=${CHROME_VERSION}"
-            }
-        }
+   
 
         stage('Build') {
             steps {
