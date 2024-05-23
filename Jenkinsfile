@@ -21,17 +21,12 @@ pipeline {
             }
         }
 
-        stage('Start WebDriverManager') {
-            steps {
-                // Iniciar o WebDriverManager
-                sh 'webdriver-manager start'
-            }
-        }
+   
 
         stage('Run Tests') {
             steps {
                 // Atualizar o WebDriverManager e, em seguida, executar os testes
-                sh 'webdriver-manager update'
+
                 sh 'mvn clean test'
             }
         }
