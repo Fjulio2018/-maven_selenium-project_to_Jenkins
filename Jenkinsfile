@@ -16,11 +16,8 @@ pipeline {
 
         stage('Setup') {
             steps {
-            // Remover a pasta selenium (caso exista) com permissões de superusuário
+                // Remover a pasta selenium (caso exista) com permissões de superusuário
                 sh 'sudo rm -rf /usr/local/lib/node_modules/webdriver-manager/selenium'
-
-                // Atualizar o WebDriverManager
-                sh 'webdriver-manager update'
             }
         }
 
@@ -33,7 +30,8 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                // Execute seus testes aqui
+                // Atualizar o WebDriverManager e, em seguida, executar os testes
+                sh 'webdriver-manager update'
                 sh 'mvn clean test'
             }
         }
