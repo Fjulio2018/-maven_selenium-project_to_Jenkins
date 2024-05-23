@@ -5,13 +5,15 @@ pipeline {
         stage('Install Browsers and Maven') {
             steps {
                 script {
+                    // Instalar wget para baixar arquivos
+                    sh 'apt-get update && apt-get install -y wget'
+
                     // Instalar Google Chrome
                     sh '''
                         if ! command -v google-chrome &> /dev/null; then
-                            wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-                            sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
-                            sudo apt-get update
-                            sudo apt-get install -y google-chrome-stable
+                            curl -sS -o google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+                            dpkg -i google-chrome.deb
+                            apt-get install -yf
                         else
                             echo "Google Chrome already installed"
                         fi
@@ -20,8 +22,7 @@ pipeline {
                     // Instalar Firefox
                     sh '''
                         if ! command -v firefox &> /dev/null; then
-                            sudo apt-get update
-                            sudo apt-get install -y firefox
+                            apt-get install -y firefox
                         else
                             echo "Firefox already installed"
                         fi
@@ -30,8 +31,7 @@ pipeline {
                     // Instalar Maven
                     sh '''
                         if ! command -v mvn &> /dev/null; then
-                            sudo apt-get update
-                            sudo apt-get install -y maven
+                            apt-get install -y maven
                         else
                             echo "Maven already installed"
                         fi
