@@ -4,7 +4,7 @@ pipeline {
 
 
     stages {
-        stage('verifica browser') {
+        stage('verify browser') {
             steps {
                 sh 'google-chrome --version'
             }

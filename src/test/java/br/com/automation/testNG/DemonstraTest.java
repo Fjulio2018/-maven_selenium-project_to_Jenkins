@@ -3,6 +3,7 @@ package br.com.automation.testNG;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -21,8 +22,9 @@ public class DemonstraTest {
         // Configura o ChromeDriver usando o WebDriverManager
         WebDriverManager.chromedriver().setup();
 
-        // Inicializa o WebDriver
-        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+        driver = new ChromeDriver(options);
         driver.manage().window().maximize();
     }
 
@@ -40,7 +42,10 @@ public class DemonstraTest {
 
     @AfterTest
     void teardown() {
-        driver.quit();
+        if (driver != null){
+            driver.quit();
+        }
+
     }
 }
 
