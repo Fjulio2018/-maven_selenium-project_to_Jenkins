@@ -19,7 +19,8 @@ public class DemonstraTest {
 
     @BeforeSuite
     public void setUpClass(){
-        WebDriverManager.chromedriver().setup();
+        WebDriverManager.chromedriver().browserVersion("125.0.6422.76").setup();
+
     }
 
     @BeforeTest
@@ -50,3 +51,7 @@ public class DemonstraTest {
         driver.quit();
     }
 }
+
+
+
+
