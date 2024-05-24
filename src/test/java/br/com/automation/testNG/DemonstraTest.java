@@ -9,15 +9,13 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.TimeUnit;
 
-import static java.lang.invoke.MethodHandles.lookup;
-import static org.slf4j.LoggerFactory.getLogger;
-
 public class DemonstraTest {
     WebDriver driver;
-    static final Logger log = getLogger(lookup().lookupClass());
+    static final Logger log = LoggerFactory.getLogger(DemonstraTest.class);
     String sutUrl = "https://bonigarcia.dev/selenium-webdriver-java/";
 
     @BeforeTest
@@ -29,6 +27,8 @@ public class DemonstraTest {
             options.addArguments("--headless");
             options.addArguments("--no-sandbox");
             options.addArguments("--disable-dev-shm-usage");
+            options.addArguments("--disable-gpu");
+            options.addArguments("--window-size=1920x1080");
             driver = new ChromeDriver(options);
             driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
             log.info("WebDriver setup completed successfully");
