@@ -9,6 +9,9 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.slf4j.Logger;
+
+import java.util.concurrent.TimeUnit;
+
 import static java.lang.invoke.MethodHandles.lookup;
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -22,10 +25,13 @@ public class DemonstraTest {
         // Configura o ChromeDriver usando o WebDriverManager
         WebDriverManager.chromedriver().setup();
 
+        WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
-        driver = new ChromeDriver(options);
-        driver.manage().window().maximize();
+        WebDriver driver = new ChromeDriver(options);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+
     }
 
     @Test
