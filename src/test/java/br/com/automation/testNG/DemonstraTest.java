@@ -22,35 +22,28 @@ public class DemonstraTest {
 
     @BeforeTest
     public void setup() {
-
-
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
-
     }
 
     @Test
     public void validaHome() {
-
         driver.get(sutUrl);
         String currentTitle = driver.getTitle();
         String expectedTitle = "Selenium WebDriver";
         log.debug("The title of {} is {}", sutUrl, currentTitle);
         Assert.assertTrue(currentTitle.contains(expectedTitle), "The Title is like that: " + currentTitle);
-
-
     }
 
     @AfterTest
     void teardown() {
-        if (driver != null){
+        if (driver != null) {
             driver.quit();
         }
-
     }
 }
-
