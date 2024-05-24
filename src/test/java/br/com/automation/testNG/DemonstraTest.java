@@ -22,13 +22,12 @@ public class DemonstraTest {
 
     @BeforeTest
     public void setup() {
-        // Configura o ChromeDriver usando o WebDriverManager
-        WebDriverManager.chromedriver().setup();
+
 
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
-        WebDriver driver = new ChromeDriver(options);
+        driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
 
